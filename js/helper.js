@@ -29,21 +29,19 @@
             }
             return isIn;
         },
-        _initAttr: function () {
+        createBoxes: function () {
             var self = this;
             self.$body = $('body');
             self.$document = $(document);
             self.$window = $(window);
-            self.$topBox = $('<a class="scroll-helper box top-box" href="javascript:void(0);" title="回到顶部">顶部</a>');
-            self.$bottomBox = $('<a class="scroll-helper box bottom-box" href="javascript:void(0);" title="回到底部">底部</a>');
-            self.$prevBox = $('<a class="scroll-helper box prev-box" href="javascript:void(0);" title="向上一屏">向上</a>');
-            self.$nextBox = $('<a class="scroll-helper box next-box" href="javascript:void(0);" title="向下一屏">向下</a>');
-            self.$settingBox = $('<a class="scroll-helper box setting-box" href="javascript:void(0)" title="设置">S</a>');
-        },
-        createBoxes: function () {
-            var self = this;
-            self._initAttr();
-            self.$body.append([self.$topBox, self.$bottomBox, self.$prevBox, self.$nextBox, self.$settingBox]);
+            self.$container = $('<div class="scroll-helper"></div>');
+            self.$topBox = $('<a class="box top-box" href="javascript:void(0);" title="回到顶部">顶部</a>');
+            self.$bottomBox = $('<a class="box bottom-box" href="javascript:void(0);" title="回到底部">底部</a>');
+            self.$prevBox = $('<a class="box prev-box" href="javascript:void(0);" title="向上一屏">向上</a>');
+            self.$nextBox = $('<a class="box next-box" href="javascript:void(0);" title="向下一屏">向下</a>');
+            self.$settingBox = $('<a class="box setting-box" href="javascript:void(0)" title="设置">S</a>');
+            self.$container.append([self.$topBox, self.$bottomBox, self.$prevBox, self.$nextBox, self.$settingBox]);
+            self.$body.append(self.$container);
         },
         bindEvents: function () {
             var self = this;
@@ -58,7 +56,6 @@
             self.$prevBox.click(function () {
                 self.scrollTo(self.$body.scrollTop() - self.$window.height());
             });
-
 
             self.$nextBox.click(function () {
                 self.scrollTo(self.$body.scrollTop() + self.$window.height());

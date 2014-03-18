@@ -34,7 +34,7 @@
             self.$body = $('body');
             self.$document = $(document);
             self.$window = $(window);
-            self.$topBox = $('<a class="scroll-helper box top-box" href="javascript:void(0);" title="回到底部">顶部</a>');
+            self.$topBox = $('<a class="scroll-helper box top-box" href="javascript:void(0);" title="回到顶部">顶部</a>');
             self.$bottomBox = $('<a class="scroll-helper box bottom-box" href="javascript:void(0);" title="回到底部">底部</a>');
             self.$prevBox = $('<a class="scroll-helper box prev-box" href="javascript:void(0);" title="向上一屏">向上</a>');
             self.$nextBox = $('<a class="scroll-helper box next-box" href="javascript:void(0);" title="向下一屏">向下</a>');

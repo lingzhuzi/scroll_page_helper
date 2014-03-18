@@ -9,10 +9,24 @@ body {
     width: 1200px;
 }
 
+#notice_wrap{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 240px;
+    height: 40px;
+    line-height: 40px;
+    display: none;
+    color:#3a87ad;
+    background-color:#d9edf7;
+    border:1px solid #bce8f1
+}
+
 .header {
     background: url(../img/icon_48.png) no-repeat;
     padding-left: 55px;
     height: 48px;
+    line-height: 48px;
 }
 
 .content {

@@ -25,6 +25,10 @@
 			var data = $('#' + use).val().split('\n');
 			saveData(use, data);
 			localStorage.setItem('use', use);
+			$('#notice_wrap').slideDown('fast');
+			window.setTimeout(function(){
+				$('#notice_wrap').slideUp('fase');
+			}, 3000);
 		});
 
 

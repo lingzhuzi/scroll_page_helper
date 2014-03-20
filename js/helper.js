@@ -22,7 +22,7 @@
         _inList: function(){
             var self = this, url = window.location.href, list = self.data, length = list.length, isIn = false;
             for(var i=0;i<length;i++){
-                if(url.indexOf(list[i]) > -1){
+                if(list[i] && url.indexOf(list[i]) > -1){
                     isIn = true;
                     break;
                 }

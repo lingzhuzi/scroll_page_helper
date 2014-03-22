@@ -31,6 +31,14 @@
 			}, 3000);
 		});
 
+		$('#example').click(function(){
+			var $content = $('.example_content');
+			if($content.is(':visible')){
+				$content.slideUp('fast');
+			} else {
+				$content.slideDown('fast');
+			}
+		});
 
 		function showBlackList(){
 			$('#black_list_radio').attr('checked', 'checked');

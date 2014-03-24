@@ -17,6 +17,7 @@
   line-height: 30px !important;
   padding: 0 !important;
   margin: 0 !important;
+  border: none !important;
 }
 
 .scroll-helper a{

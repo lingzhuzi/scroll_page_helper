@@ -1,11 +1,14 @@
 (function(){
 	$(function(){
 		var BLACK_LIST = 'black_list', WHITE_LIST = 'white_list';
+		var defualtBlackList = ['http://mail.126.com/', 'http://www.baidu.com/', 'http://cwebmail.mail.163.com/', 
+		'http://zhan.renren.com/', 'http://ditu.baidu.com/', 'http://map.baidu.com/', 'http://ditu.google.cn/', 
+		'https://maps.google.com/', 'http://map.qq.com/'];
 		var use = localStorage.getItem('use');
 		if(!use){
 			use = BLACK_LIST;
 			localStorage.setItem('use', use);
-			saveData(BLACK_LIST, []);
+			saveData(BLACK_LIST, defualtBlackList);
 			saveData(WHITE_LIST, []);
 		} else if(use == BLACK_LIST){
 			showBlackList();

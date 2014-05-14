@@ -1,66 +1,58 @@
-.scroll-helper{
-  position: fixed;
-  top: 85px;
-  right: 10px;
-  width: 102px;
-  height: 62px;
-  z-index: 99999;
+.scroll-helper.box {
+    position: fixed;
+    z-index: 99999;
+    background: black !important;
+    opacity: 0.25;
+    text-align: center;
+    width: 45px !important;
+    height: 27px !important;
+    line-height: 27px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
 }
 
-.scroll-helper .box{
-  position: absolute;
-  background: black !important;
-  opacity: 0.25;
-  text-align: center;
-  width: 50px !important;
-  height: 30px !important;
-  line-height: 30px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
+a.scroll-helper {
+    font-family: "Microsoft YaHei", 'simsun', 'arial' !important;
+    color: white !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
 }
 
-.scroll-helper a{
-  font-family: "Microsoft YaHei", 'simsun', 'arial' !important;
-  color: white !important;
-  font-size: 14px !important;
-  text-decoration: none !important;
+a:hover.scroll-helper {
+    text-decoration: none !important;
 }
 
-.scroll-helper a:hover{
-  text-decoration: none !important;
+.scroll-helper.box.top-box {
+    top: 80px;
+    right: 10px;
+    border-radius: 0 8px;
 }
 
-.scroll-helper .box.top-box{
-  top: 0;
-  right: 0;
-  border-radius: 0 8px;
+.scroll-helper.box.bottom-box {
+    top: 109px;
+    right: 10px;
+    border-radius: 8px 0;
 }
 
-.scroll-helper .box.bottom-box{
-	bottom: 0;
-  right: 0;
-	border-radius: 8px 0;
+.scroll-helper.box.prev-box {
+    top: 80px;
+    right: 57px;
+    border-radius: 8px 0;
 }
 
-.scroll-helper .box.prev-box{
-	top: 0;
-	left: 0;
-	border-radius: 8px 0;
+.scroll-helper.box.next-box {
+    top: 109px;
+    right: 57px;
+    border-radius: 0 8px;
 }
 
-.scroll-helper .box.next-box{
-	bottom: 0;
-	left: 0;
-	border-radius: 0 8px;
-}
-
-.scroll-helper .box.setting-box{
-  top: 17.5px;
-  left: 38.5px;
-  width: 25px !important;
-  height: 25px !important;
-  line-height: 25px !important;
-  border-radius: 12.5px;
-  opacity: 0;
+.scroll-helper.box.setting-box {
+    top: 97px;
+    right: 45px;
+    width: 24px !important;
+    height: 24px !important;
+    line-height: 24px !important;
+    border-radius: 12px;
+    opacity: 0;
 }

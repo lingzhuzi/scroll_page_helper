@@ -7,6 +7,5 @@ scroll page helper
 
 下载
 
-地址：https://github.com/lingzhuzi/scroll_page_helper/blob/master/scroll_page_helper.crx?raw=true
+地址：https://github.com/lingzhuzi/scroll_page_helper/blob/master/scroll_page_helper.crx?raw=true ,下载完成后拖到扩展程序页面即可完成安装。
 
-下载完成后拖到扩展程序页面即可完成安装。

@@ -10,6 +10,7 @@
 			localStorage.setItem('use', use);
 			saveData(BLACK_LIST, defualtBlackList);
 			saveData(WHITE_LIST, []);
+                                         showBlackList();
 		} else if(use == BLACK_LIST){
 			showBlackList();
 		} else if (use == WHITE_LIST){

@@ -1,7 +1,7 @@
 (function(){
 	$(function(){
 		var BLACK_LIST = 'black_list', WHITE_LIST = 'white_list';
-		var defualtBlackList = ['http://mail.126.com/', 'http://www.baidu.com/', 'http://cwebmail.mail.163.com/', 
+		var defualtBlackList = ['http://mail.126.com/', 'http://cwebmail.mail.163.com/', 
 		'http://zhan.renren.com/', 'http://ditu.baidu.com/', 'http://map.baidu.com/', 'http://ditu.google.cn/', 
 		'https://maps.google.com/', 'http://map.qq.com/'];
 		var use = localStorage.getItem('use');

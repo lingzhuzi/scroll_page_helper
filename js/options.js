@@ -1,22 +1,24 @@
 (function(){
 	$(function(){
 		var BLACK_LIST = 'black_list', WHITE_LIST = 'white_list';
-		var defualtBlackList = ['http://mail.126.com/', 'http://cwebmail.mail.163.com/', 
-		'http://zhan.renren.com/', 'http://ditu.baidu.com/', 'http://map.baidu.com/', 'http://ditu.google.cn/', 
-		'https://maps.google.com/', 'http://map.qq.com/'];
+		var defualtBlackList = [];
 		var use = localStorage.getItem('use');
 		if(!use){
 			use = BLACK_LIST;
 			localStorage.setItem('use', use);
 			saveData(BLACK_LIST, defualtBlackList);
 			saveData(WHITE_LIST, []);
-                                         showBlackList();
+            showBlackList();
 		} else if(use == BLACK_LIST){
 			showBlackList();
 		} else if (use == WHITE_LIST){
 			showWhiteList();
 		}
 
+var savePosition = localStorage.getItem('savePosition');
+if(savePosition == 'true'){
+	$('#save_position').attr('checked', 'checked');
+}
 		$('#black_list_radio').click(function(){
 			showBlackList();
 		});
@@ -29,6 +31,7 @@
 			var data = $('#' + use).val().split('\n');
 			saveData(use, data);
 			localStorage.setItem('use', use);
+			localStorage.setItem('savePosition', $('#save_position').is(':checked'));
 			$('#notice_wrap').slideDown('fast');
 			window.setTimeout(function(){
 				$('#notice_wrap').slideUp('fase');

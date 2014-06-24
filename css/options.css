@@ -9,7 +9,7 @@ body {
     width: 1200px;
 }
 
-#notice_wrap{
+#notice_wrap {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
@@ -17,9 +17,9 @@ body {
     height: 40px;
     line-height: 40px;
     display: none;
-    color:#3a87ad;
-    background-color:#d9edf7;
-    border:1px solid #bce8f1
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1
 }
 
 .header {
@@ -59,7 +59,7 @@ a#save_btn:hover {
     width: 680px;
 }
 
-.example_content{
+.example_content {
     margin-left: 20px;
     display: none;
 }

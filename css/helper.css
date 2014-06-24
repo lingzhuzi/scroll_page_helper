@@ -1,6 +1,14 @@
-.scroll-helper.box {
+.scroll-helper {
     position: fixed;
+    top: 85px;
+    right: 10px;
+    width: 92px;
+    height: 56px;
     z-index: 99999;
+}
+
+.scroll-helper .box {
+    position: absolute;
     background: black !important;
     opacity: 0.25;
     text-align: center;
@@ -12,44 +20,44 @@
     border: none !important;
 }
 
-a.scroll-helper {
+.scroll-helper a {
     font-family: "Microsoft YaHei", 'simsun', 'arial' !important;
     color: white !important;
     font-size: 14px !important;
     text-decoration: none !important;
 }
 
-a:hover.scroll-helper {
+.scroll-helper a:hover {
     text-decoration: none !important;
 }
 
-.scroll-helper.box.top-box {
-    top: 80px;
-    right: 10px;
+.scroll-helper .box.top-box {
+    top: 0;
+    right: 0;
     border-radius: 0 8px;
 }
 
-.scroll-helper.box.bottom-box {
-    top: 109px;
-    right: 10px;
+.scroll-helper .box.bottom-box {
+    bottom: 0;
+    right: 0;
     border-radius: 8px 0;
 }
 
-.scroll-helper.box.prev-box {
-    top: 80px;
-    right: 57px;
+.scroll-helper .box.prev-box {
+    top: 0;
+    left: 0;
     border-radius: 8px 0;
 }
 
-.scroll-helper.box.next-box {
-    top: 109px;
-    right: 57px;
+.scroll-helper .box.next-box {
+    bottom: 0;
+    left: 0;
     border-radius: 0 8px;
 }
 
-.scroll-helper.box.setting-box {
-    top: 97px;
-    right: 44px;
+.scroll-helper .box.setting-box {
+    top: 16px;
+    right: 34px;
     width: 24px !important;
     height: 24px !important;
     line-height: 24px !important;

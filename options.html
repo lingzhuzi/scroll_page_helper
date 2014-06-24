@@ -13,10 +13,10 @@
 
         <h3>选项</h3>
 
-<div>
-<input type="checkbox" name="save_position" id="save_position">
-<label for="save_position">移动组件后保存为默认位置</label>
-</div>
+        <div>
+            <input type="checkbox" name="save_position" id="save_position">
+            <label for="save_position">移动组件后保存为默认位置</label>
+        </div>
 
         <div class="ctn">
             <input type="radio" name="list" checked="checked" id="black_list_radio">
@@ -34,6 +34,7 @@
         </div>
         <div style="text-align: center; margin-top: 20px;margin-bottom: 40px;">
             <a id="save_btn" href="#" class="btn btn-primary">保存</a>
+
             <div id="notice_wrap">保存成功</div>
         </div>
     </div>
@@ -51,14 +52,17 @@
 
         <p>4. 将网址写入名单即可。则以该网址开头的页面中都有效。<a id="example" href="#">例子</a></p>
 
-        <p class="example_content">黑名单中如果存在http://example.com/a/，将在http://example.com/a/开头所有页面都不启用该扩展，而在http://example.com/b/开头的页面中仍然会启用该扩展。</p>
+        <p class="example_content">
+            黑名单中如果存在http://example.com/a/，将在http://example.com/a/开头所有页面都不启用该扩展，而在http://example.com/b/开头的页面中仍然会启用该扩展。</p>
 
         <p>5. 名单中的网址应符合以下要求</p>
 
         <p style="margin-left: 20px;">(1) 网址应包括http://或https://。</p>
 
         <p style="margin-left: 20px;">(2) 每行一个网址，结尾不加任何不属于网址的字符。</p>
+
         <p>6. 四个按钮中间有个隐藏的设置按钮（S），鼠标移动上去即可显示出来，点击打开设置页面；按住可拖动组件。</p>
+
         <p>7. 意见与建议反馈：请发送邮件至qdyuyh@126.com，在标题中请注明“#翻屏小助手#”</p>
     </div>
 </div>

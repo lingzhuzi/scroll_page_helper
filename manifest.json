@@ -1,7 +1,7 @@
 {
   "name": "翻屏小助手",
   "description": "快速的回到顶部底部、向上向下翻页",
-  "version": "1.0",
+  "version": "1.1",
   "icons": { 
     "16": "img/icon_16.png" ,
     "48": "img/icon_48.png" ,

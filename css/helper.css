@@ -64,3 +64,28 @@
     border-radius: 12px;
     opacity: 0;
 }
+
+.scroll-helper .context-menu{
+    list-style: none;
+    display: inline-block;
+    position: absolute;
+    top: 40px;
+    left: 46px;
+    width: 100px;
+    display: none;
+}
+
+.scroll-helper .context-menu a{
+    padding-left: 6px;
+    padding-right: 6px;
+    display: inline-block;
+    line-height: 24px;
+    height: 24px;
+    width: 100%;
+    background: black;
+    opacity: 0.8;
+}
+
+.scroll-helper .context-menu a:hover{
+    opacity: 1;
+}

@@ -9,6 +9,7 @@
                 if (self._canInit()) {
                     self.createBoxes();
                     self.setPosition(response.position);
+                    self.createContextMenus();
                     self.bindEvents();
                     self.displayBoxes();
                 }
@@ -32,17 +33,56 @@
         },
         createBoxes: function () {
             var self = this;
-            self.$body = $('body');
+
+            self.$body     = $('body');
             self.$document = $(document);
-            self.$window = $(window);
-            self.$container = $('<div class="scroll-helper"></div>');
-            self.$topBox = $('<a class="box top-box" href="javascript:void(0);" title="回到顶部">顶部</a>');
-            self.$bottomBox = $('<a class="box bottom-box" href="javascript:void(0);" title="回到底部">底部</a>');
-            self.$prevBox = $('<a class="box prev-box" href="javascript:void(0);" title="向上一屏">向上</a>');
-            self.$nextBox = $('<a class="box next-box" href="javascript:void(0);" title="向下一屏">向下</a>');
+            self.$window   = $(window);
+
+            self.$container  = $('<div class="scroll-helper"></div>');
+            self.$topBox     = $('<a class="box top-box" href="javascript:void(0);" title="回到顶部">顶部</a>');
+            self.$bottomBox  = $('<a class="box bottom-box" href="javascript:void(0);" title="回到底部">底部</a>');
+            self.$prevBox    = $('<a class="box prev-box" href="javascript:void(0);" title="向上一屏">向上</a>');
+            self.$nextBox    = $('<a class="box next-box" href="javascript:void(0);" title="向下一屏">向下</a>');
             self.$settingBox = $('<a class="box setting-box" href="javascript:void(0)" title="设置">S</a>');
+
             self.$container.append([self.$topBox, self.$bottomBox, self.$prevBox, self.$nextBox, self.$settingBox]);
             self.$body.append(self.$container);
+        },
+        createContextMenus: function(){
+            var self = this;
+
+            var $close               = $('<li><a href="javascript:void(0);" class="close">关闭</a></li>');
+            var $save_position       = $('<li><a href="javascript:void(0);" class="save-position">保存位置</a></li>');
+            var $not_in_this_page    = $('<li><a href="javascript:void(0);" class="not-in-this-page">不在该网页使用</a></li>');
+            var $not_in_this_website = $('<li><a href="javascript:void(0);" class="not-in-this-website">不在该网站使用</a></li>');
+
+            self.$menus = $('<ul class="context-menu"></ul>');
+            self.$menus.append([$close, $save_position, $not_in_this_page, $not_in_this_website]);
+            self.$container.append(self.$menus);
+        },
+        getPosition: function (){
+            var self = this;
+            var $ctn = self.$container;
+
+            var left   = $ctn.css('left');
+            var right  = $ctn.css('right');
+            var top    = $ctn.css('top');
+            var bottom = $ctn.css('bottom');
+
+            var position = {};
+            if (left == 'inherit' || left == 'auto' || !left){
+                position['right'] = Number.parseInt(right);
+            } else {
+                position['left'] = Number.parseInt(left);
+            }
+
+            if(top == 'inherit'|| top == 'auto' || !top){
+                position['bottom'] = Number.parseInt(bottom);
+            } else {
+                position['top'] = Number.parseInt(top);
+            }
+
+            return position;
         },
         setPosition: function (position) {
             var self = this;
@@ -62,6 +102,12 @@
             }
         },
         bindEvents: function () {
+            var self = this;
+            self.bindBoxesEvents();
+            self.bindDragEvents();
+            self.bindMenuEvents();
+        },
+        bindBoxesEvents: function(){
             var self = this;
             self.$topBox.click(function () {
                 self.scrollTo(0);
@@ -117,34 +163,90 @@
                     chrome.extension.sendMessage({message: 'openOptions'});
                 }
             });
-
+        },
+        bindDragEvents: function(){
+            var self = this;
             self.$container.draggable({
                 handle: ".setting-box",
                 start: function (event, ui) {
                     self.dragging = true;
-                    self.$container.children().show();
+                    self.$container.children('.box').show();
                 },
                 stop: function (event, ui) {
-                    var position = ui.position, left = position.left, top = position.top, width = self.$window.width(), height = self.$window.height();
-                    var pos = {};
-                    if (left > width / 2) {
-                        pos.right = width - left - self.$container.width();
-                    } else {
-                        pos.left = position.left;
-                    }
-
-                    if (top > height / 2) {
-                        pos.bottom = height - top - self.$container.height();
-                    } else {
-                        pos.top = position.top;
-                    }
-                    self.setPosition(pos);
-                    chrome.extension.sendMessage({message: "savePosition", position: pos});
+                    var left = ui.position.left, top = ui.position.top;
+                    var position = self.buildPosition(left, top);
+                    self.setPosition(position);
+                    chrome.extension.sendMessage({message: "savePosition", position: position});
                     window.setTimeout(function () {
                         self.dragging = false;
                     }, 100);
                 }
             });
+        },
+        bindMenuEvents: function(){
+            var self = this;
+
+            self.$settingBox.bind("contextmenu", function(){
+                self.$menus.show();
+                return false;
+            });
+
+            $(document).bind('mousedown',function(){
+                self.$menus.hide();
+            });
+
+           self.$menus.hover(function(){
+                //菜单出来后移上去点左健不会隐藏当前菜单
+                $(document).unbind('mousedown');
+            },function(){
+                //移出后点击其它区域则隐藏菜单
+                $(document).bind('mousedown',function(){
+                    self.$menus.hide();
+                });
+            });
+
+            self.bindMenuItemEvents();
+        },
+        bindMenuItemEvents: function(){
+            var self = this;
+            self.$menus.find('.close').click(function(){
+                self.$container.remove();
+            });
+            self.$menus.find('.save-position').click(function(){
+                var position = self.getPosition();
+                console.log(position);
+                chrome.extension.sendMessage({message: "savePosition", position: position, from: 'menu'});
+            });
+            self.$menus.find('.not-in-this-page').click(function(){
+                var url = location.href;
+                url = url.split(/[#?]/)[0];
+                chrome.extension.sendMessage({message: "addToBlackList", url: url});
+                self.$container.remove();
+            });
+            self.$menus.find('.not-in-this-website').click(function(){
+                var url = location.protocol + "//" + location.hostname;
+                chrome.extension.sendMessage({message: "addToBlackList", url: url});
+                self.$container.remove();
+            });
+            self.$menus.find('a').click(function(){
+                self.$menus.hide();
+            });
+        },
+        buildPosition: function(left, top){
+            var self = this, width = self.$window.width(), height = self.$window.height();
+            var position = {};
+            if (left > width / 2) {
+                position.right = width - left - self.$container.width();
+            } else {
+                position.left = left;
+            }
+
+            if (top > height / 2) {
+                position.bottom = height - top - self.$container.height();
+            } else {
+                position.top = top;
+            }
+            return position;
         },
         scrollTo: function (scrollTop) {
             var self = this;

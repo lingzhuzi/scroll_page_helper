@@ -1,5 +1,11 @@
 (function () {
     $(function () {
+        var version = null;
+        $.get(chrome.extension.getURL('manifest.json'), function(info){
+            version = info.version;
+            $('#version_no').text(version);
+        }, 'json');
+
         var BLACK_LIST = 'black_list', WHITE_LIST = 'white_list';
         var defualtBlackList = [];
         var use = localStorage.getItem('use');

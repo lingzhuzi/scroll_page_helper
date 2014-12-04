@@ -214,7 +214,6 @@
             });
             self.$menus.find('.save-position').click(function(){
                 var position = self.getPosition();
-                console.log(position);
                 chrome.extension.sendMessage({message: "savePosition", position: position, from: 'menu'});
             });
             self.$menus.find('.not-in-this-page').click(function(){

@@ -71,8 +71,12 @@
     position: absolute;
     top: 40px;
     left: 46px;
-    width: 100px;
+    width: 110px;
     display: none;
+}
+
+.scroll-helper .context-menu li{
+    height: 24px;
 }
 
 .scroll-helper .context-menu a{

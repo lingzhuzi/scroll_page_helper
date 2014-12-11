@@ -71,15 +71,15 @@
 
             var position = {};
             if (left == 'inherit' || left == 'auto' || !left){
-                position['right'] = Number.parseInt(right);
+                position['right'] = parseInt(right);
             } else {
-                position['left'] = Number.parseInt(left);
+                position['left'] = parseInt(left);
             }
 
             if(top == 'inherit'|| top == 'auto' || !top){
-                position['bottom'] = Number.parseInt(bottom);
+                position['bottom'] = parseInt(bottom);
             } else {
-                position['top'] = Number.parseInt(top);
+                position['top'] = parseInt(top);
             }
 
             return position;

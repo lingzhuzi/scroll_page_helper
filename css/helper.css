@@ -1,96 +1,96 @@
 .scroll-helper {
-    position: fixed;
-    top: 85px;
-    right: 10px;
-    width: 92px;
-    height: 56px;
-    z-index: 99999;
+  position: fixed;
+  top: 85px;
+  right: 10px;
+  width: 92px;
+  height: 56px;
+  z-index: 99999;
 }
 
 .scroll-helper .box {
-    position: absolute;
-    background: black !important;
-    opacity: 0.25;
-    text-align: center;
-    width: 45px !important;
-    height: 27px !important;
-    line-height: 27px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
+  position: absolute;
+  background: black !important;
+  opacity: 0.25;
+  text-align: center;
+  width: 45px !important;
+  height: 27px !important;
+  line-height: 27px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
 }
 
 .scroll-helper a {
-    font-family: "Microsoft YaHei", 'simsun', 'arial' !important;
-    color: white !important;
-    font-size: 14px !important;
-    text-decoration: none !important;
+  font-family: "Microsoft YaHei", 'simsun', 'arial' !important;
+  color: white !important;
+  font-size: 14px !important;
+  text-decoration: none !important;
 }
 
 .scroll-helper a:hover {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 .scroll-helper .box.top-box {
-    top: 0;
-    right: 0;
-    border-radius: 0 8px;
+  top: 0;
+  right: 0;
+  border-radius: 0 8px;
 }
 
 .scroll-helper .box.bottom-box {
-    bottom: 0;
-    right: 0;
-    border-radius: 8px 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 8px 0;
 }
 
 .scroll-helper .box.prev-box {
-    top: 0;
-    left: 0;
-    border-radius: 8px 0;
+  top: 0;
+  left: 0;
+  border-radius: 8px 0;
 }
 
 .scroll-helper .box.next-box {
-    bottom: 0;
-    left: 0;
-    border-radius: 0 8px;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 8px;
 }
 
 .scroll-helper .box.setting-box {
-    top: 16px;
-    right: 34px;
-    width: 24px !important;
-    height: 24px !important;
-    line-height: 24px !important;
-    border-radius: 12px;
-    opacity: 0;
+  top: 16px;
+  right: 34px;
+  width: 24px !important;
+  height: 24px !important;
+  line-height: 24px !important;
+  border-radius: 12px;
+  opacity: 0;
 }
 
 .scroll-helper .context-menu{
-    list-style: none;
-    display: inline-block;
-    position: absolute;
-    top: 40px;
-    left: 46px;
-    width: 110px;
-    display: none;
+  list-style: none;
+  display: inline-block;
+  position: absolute;
+  top: 40px;
+  left: 46px;
+  width: 110px;
+  display: none;
 }
 
 .scroll-helper .context-menu li{
-    height: 24px;
+  height: 24px;
 }
 
 .scroll-helper .context-menu a{
-    padding-left: 6px;
-    padding-right: 6px;
-    display: inline-block;
-    text-align: left;
-    line-height: 24px;
-    height: 24px;
-    width: 100%;
-    background: black;
-    opacity: 0.8;
+  padding-left: 6px;
+  padding-right: 6px;
+  display: inline-block;
+  text-align: left;
+  line-height: 24px;
+  height: 24px;
+  width: 100%;
+  background: black;
+  opacity: 0.8;
 }
 
 .scroll-helper .context-menu a:hover{
-    opacity: 1;
+  opacity: 1;
 }

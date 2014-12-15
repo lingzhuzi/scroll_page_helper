@@ -13,14 +13,14 @@
   },
   "options_page": "options.html",
   "permissions": [
-    "tabs", "http://*/*", "https://*/*"
+    "tabs", "http://*/*", "https://*/*", "background"
   ],
   "browser_action": {
     "default_title": "翻屏小助手",
     "default_icon": "img/icon.png",
     "default_popup": "popup.html"
   },
-  "manifest_version": 3,
+  "manifest_version": 2,
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],

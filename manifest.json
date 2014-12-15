@@ -13,7 +13,7 @@
   },
   "options_page": "options.html",
   "permissions": [
-    "tabs", "http://*/*", "https://*/*", "background"
+    "tabs", "http://*/*", "https://*/*"
   ],
   "browser_action": {
     "default_title": "翻屏小助手",
@@ -25,7 +25,8 @@
     {
       "matches": ["http://*/*", "https://*/*"],
       "css": ["css/helper.css"],
-      "js": ["js/jquery-2.1.0.min.js", "js/jquery-ui-1.10.4.custom.min.js", "js/helper.js"]
+      "js": ["js/jquery-2.1.0.min.js", "js/jquery-ui-1.10.4.custom.min.js", "js/helper.js"],
+      "run_at": "document_start"
     }
   ]
 }

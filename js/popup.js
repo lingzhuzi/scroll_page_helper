@@ -1,7 +1,8 @@
 (function () {
-  $(function () {
-    $('#options_page').click(function () {
-      chrome.extension.getBackgroundPage().open('options.html');
-    });
-  });
+  chrome.extension.sendMessage({message: 'openOptions'});
+
+  $.get(chrome.extension.getURL('manifest.json'), function(info){
+    var version = info.version;
+    $('#version_no').text(version);
+  }, 'json');
 })();

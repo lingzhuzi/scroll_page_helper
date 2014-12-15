@@ -1,4 +1,9 @@
-.content {
+.title {
   width: 100px;
   text-align: center;
+}
+
+.content {
+  width: 150px;
+  text-align: left;
 }

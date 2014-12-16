@@ -6,6 +6,7 @@
       function (response) {
         self.use = response.use;
         self.data = response.data;
+        self.scroll_speed = response.scroll_speed;
         if (self._canInit()) {
           self.createBoxes();
           self.setPosition(response.position);
@@ -51,13 +52,14 @@
     createContextMenus: function(){
       var self = this;
 
-      var $close        = $('<li><a href="javascript:void(0);" class="close">关闭</a></li>');
-      var $save_position    = $('<li><a href="javascript:void(0);" class="save-position">保存位置</a></li>');
-      var $not_in_this_page  = $('<li><a href="javascript:void(0);" class="not-in-this-page">不在该网页使用</a></li>');
+      var $close               = $('<li><a href="javascript:void(0);" class="close">关闭</a></li>');
+      var $auto_scroll         = $('<li><a href="javascript:void(0);" class="auto-scroll">开启自动滚动</a></li>');
+      var $save_position       = $('<li><a href="javascript:void(0);" class="save-position">保存位置</a></li>');
+      var $not_in_this_page    = $('<li><a href="javascript:void(0);" class="not-in-this-page">不在该网页使用</a></li>');
       var $not_in_this_website = $('<li><a href="javascript:void(0);" class="not-in-this-website">不在该网站使用</a></li>');
 
       self.$menus = $('<ul class="context-menu"></ul>');
-      self.$menus.append([$close, $save_position, $not_in_this_page, $not_in_this_website]);
+      self.$menus.append([$close, $save_position, $auto_scroll, $not_in_this_page, $not_in_this_website]);
       self.$container.append(self.$menus);
     },
     getPosition: function (){
@@ -212,6 +214,16 @@
       self.$menus.find('.close').click(function(){
         self.$container.remove();
       });
+      self.$menus.find('.auto-scroll').click(function(){
+        var scrolling = self.scrolling;
+        if(scrolling){
+          self.stopAutoScroll();
+          $(this).text('开启自动滚动');
+        } else {
+          self.startAutoScroll();
+          $(this).text('关闭自动滚动');
+        }
+      });
       self.$menus.find('.save-position').click(function(){
         var position = self.getPosition();
         chrome.extension.sendMessage({message: "savePosition", position: position, from: 'menu'});
@@ -271,6 +283,23 @@
         self.$nextBox.show();
         self.$bottomBox.show();
       }
+    },
+    startAutoScroll: function(){
+      var self = this, speed = 100/self.scroll_speed;
+      self.scrolling = true;
+      self.autoScrollInterval = window.setInterval(function(){
+        var scrollTop = self.$body.scrollTop();
+        if(!self.scrolling || scrollTop >= self.$document.height() - self.$window.height()){
+          self.stopAutoScroll();
+        } else {
+         self.$body.scrollTop(scrollTop + 1);
+        }
+      }, speed);
+    },
+    stopAutoScroll: function(){
+      var self = this;
+      self.scrolling = false;
+      window.clearInterval(self.autoScrollInterval);
     }
   };
 

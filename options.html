@@ -13,13 +13,13 @@
         <h3>版本：<span id="version_no"></span></h3>
         <h3>选项</h3>
 
-        <div>
-            <input type="checkbox" name="save_position" id="save_position">
-            <label for="save_position">移动组件后保存为默认位置</label>
-        </div>
-
         <div style="margin-top: 20px;">
             <label>位置</label>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <input type="checkbox" name="save_position" id="save_position">
+            <label for="save_position">移动组件后保存为默认位置</label>
         </div>
 
         <div style="margin-top: 10px;">
@@ -27,6 +27,14 @@
             <input class="left_or_right" type="number">
             <select class="top_or_bottom"><option value="3">上</option><option value="4">下</option></select>
             <input class="top_or_bottom" type="number">
+        </div>
+
+        <div style="margin-top: 20px;">
+            <label>自动滚动速度</label>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <input id="auto_scroll_speed" type="number">
         </div>
 
         <div style="margin-top: 20px;">
@@ -74,9 +82,13 @@
 
         <p style="margin-left: 20px;">(2) 每行一个网址，结尾不加任何不属于网址的字符。</p>
 
-        <p>6. 四个按钮中间有个隐藏的设置按钮（S），鼠标移动上去即可显示出来，点击打开设置页面；按住可拖动组件；点击右键可以进行快捷操作。</p>
+        <p>6. 位置的值以像素为单位。</p>
 
-        <p>7. 意见与建议反馈：请发送邮件至qdu_yanghui@126.com，在标题中请注明“#翻屏小助手#”</p>
+        <p>7. 自动滚动的速度值越大，滚动速度越快。</p>
+
+        <p>8. 四个按钮中间有个隐藏的设置按钮（S），鼠标移动上去即可显示出来，点击打开设置页面；按住可拖动组件；点击右键可以进行快捷操作。</p>
+
+        <p>9. 意见与建议反馈：请发送邮件至qdu_yanghui@126.com，在标题中请注明“#翻屏小助手#”。</p>
     </div>
 </div>
 <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>

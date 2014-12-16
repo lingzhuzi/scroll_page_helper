@@ -15,6 +15,7 @@
       var data = $('#' + use).val().split('\n');
       saveData(use, data);
       savePosition();
+      saveAutoScrollSpeed();
       localStorage.setItem('use', use);
       localStorage.setItem('savePosition', $('#save_position').is(':checked'));
       $('#notice_wrap').slideDown('fast');
@@ -58,6 +59,7 @@
       }
 
       showPosition();
+      showAutoScrollSpeed();
     }
 
     function showBlackList() {
@@ -119,6 +121,20 @@
 
     function saveData(list_name, data) {
       localStorage.setItem(list_name, JSON.stringify(data));
+    }
+
+    function showAutoScrollSpeed(){
+      var speed = localStorage.getItem('scroll_speed');
+      if(!speed) {
+        speed = 1;
+        localStorage.setItem('scroll_speed', speed);
+      }
+      $("#auto_scroll_speed").val(speed);
+    }
+
+    function saveAutoScrollSpeed(){
+      var speed = $("#auto_scroll_speed").val();
+      localStorage.setItem('scroll_speed', speed);
     }
   });
 })();

@@ -4,7 +4,8 @@
       var use = localStorage.getItem('use') || 'black_list';
       var data = JSON.parse(localStorage.getItem(use)) || [];
       var position = JSON.parse(localStorage.getItem('position'));
-      sendResponse({use: use, data: data, position: position});
+      var scroll_speed = parseInt(localStorage.getItem('scroll_speed'));
+      sendResponse({use: use, data: data, position: position, scroll_speed: scroll_speed});
     } else if (request.message == 'openOptions') {
       chrome.extension.getBackgroundPage().open('options.html');
     } else if (request.message == 'savePosition') {

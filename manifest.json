@@ -2,7 +2,7 @@
   "name": "翻屏小助手",
   "description": "快速的回到顶部底部、向上向下翻页",
   "update_url": "http://upext.chrome.360.cn/intf.php?method=ExtUpdate.query",
-  "version": "1.3",
+  "version": "1.0",
   "icons": {
     "16": "img/icon_16.png" ,
     "48": "img/icon_48.png" ,
@@ -27,7 +27,7 @@
       "matches": ["http://*/*", "https://*/*"],
       "css": ["css/helper.css"],
       "js": ["js/jquery-2.1.0.min.js", "js/jquery-ui-1.10.4.custom.min.js", "js/helper.js"],
-      "run_at": "document_start"
+      "run_at": "document_end"
     }
   ]
 }

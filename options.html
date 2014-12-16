@@ -18,18 +18,31 @@
             <label for="save_position">移动组件后保存为默认位置</label>
         </div>
 
-        <div class="ctn">
+        <div style="margin-top: 20px;">
+            <label>位置</label>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <select class="left_or_right"><option value="1">左</option><option value="2">右</option></select>
+            <input class="left_or_right" type="number">
+            <select class="top_or_bottom"><option value="3">上</option><option value="4">下</option></select>
+            <input class="top_or_bottom" type="number">
+        </div>
+
+        <div style="margin-top: 20px;">
+            <label>应用规则</label>
+        </div>
+
+        <div style="margin-top: 10px;">
             <input type="radio" name="list" checked="checked" id="black_list_radio">
             <label for="black_list_radio">使用黑名单</label>
             <input type="radio" name="list" id="white_list_radio">
             <label for="white_list_radio">使用白名单</label>
         </div>
-        <div id="black_list_ctn" class="ctn">
-            <label for="black_list">黑名单</label>
+        <div id="black_list_ctn" style="margin-top: 0;">
             <textarea id="black_list"></textarea>
         </div>
-        <div id="white_list_ctn" class="ctn" style="display: none;">
-            <label for="white_list">白名单</label>
+        <div id="white_list_ctn" style="display: none; margin-top: 0;">
             <textarea id="white_list"></textarea>
         </div>
         <div style="text-align: center; margin-top: 20px;margin-bottom: 40px;">

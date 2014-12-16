@@ -34,11 +34,11 @@ body {
   width: 520px;
 }
 
-.ctn {
+.content > div {
   margin-top: 20px;
 }
 
-.ctn textarea {
+textarea {
   width: 500px;
   height: 150px;
   resize: vertical;

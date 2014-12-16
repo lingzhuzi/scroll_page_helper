@@ -274,6 +274,8 @@
     }
   };
 
-  new ScrollHelper();
+  // $(function(){
+    new ScrollHelper();
+  // });
 
 })();

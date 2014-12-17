@@ -34,6 +34,11 @@ body {
   width: 520px;
 }
 
+#update_ctn {
+  display: none;
+  border-bottom: 1px dashed gray;
+}
+
 .content > div {
   margin-top: 20px;
 }
@@ -56,7 +61,8 @@ a#save_btn:hover {
 
 .help {
   float: left;
-  width: 680px;
+  width: 660px;
+  margin-left: 20px;
 }
 
 .example_content {

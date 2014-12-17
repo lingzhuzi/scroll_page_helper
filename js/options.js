@@ -1,7 +1,18 @@
 (function () {
   $(function () {
     var BLACK_LIST = 'black_list', WHITE_LIST = 'white_list';
+    var VERSION = 0;
     showData();
+
+    $.get("https://raw.githubusercontent.com/lingzhuzi/scroll_page_helper_release/master/version.json", function(json){
+      var data = JSON.parse(json);
+      var version = data.version;
+      var log = data.log;
+      if (version > VERSION){
+        $('#update_ctn').show();
+        $('#update_ctn .log').html($(log));
+      }
+    });
 
     $('#black_list_radio').click(function () {
       showBlackList();

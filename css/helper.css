@@ -73,6 +73,8 @@
   left: 46px;
   width: 110px;
   display: none;
+  padding: 0;
+  margin: 0;
 }
 
 .scroll-helper .context-menu li{
@@ -89,6 +91,13 @@
   width: 100%;
   background: black;
   opacity: 0.8;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.scroll-helper .context-menu a.close{
+  float: left;
 }
 
 .scroll-helper .context-menu a:hover{

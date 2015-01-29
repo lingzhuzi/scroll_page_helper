@@ -36,7 +36,13 @@ body {
 
 #update_ctn {
   display: none;
-  border-bottom: 1px dashed gray;
+  border: 2px solid #FDBF3B;
+  padding: 0 10px;
+  background-color: #FFEBC1;
+}
+
+#update_ctn .version {
+  margin-right: 10px;
 }
 
 .content > div {

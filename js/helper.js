@@ -285,7 +285,7 @@
       }
     },
     startAutoScroll: function(){
-      var self = this, speed = 100/self.scroll_speed;
+      var self = this, speed = 1000/self.scroll_speed;
       self.scrolling = true;
       self.autoScrollInterval = window.setInterval(function(){
         var scrollTop = self.$body.scrollTop();

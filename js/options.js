@@ -2,54 +2,72 @@
   $(function () {
     var BLACK_LIST = 'black_list', WHITE_LIST = 'white_list';
     var VERSION = 0;
-    showData();
+    showSettingData();
+    bindEvents();
+    checkUpdate();
 
-    $.get("https://raw.githubusercontent.com/lingzhuzi/scroll_page_helper_release/master/version.json", function(json){
-      var data = JSON.parse(json);
-      var version = data.version;
-      var log = data.log;
-      if (version > VERSION){
-        $('#update_ctn').show();
-        $('#update_ctn .log').html($(log));
-      }
-    });
+    function showSettingData(){
+      showVersion();
+      showList();
+      showPosition();
+      showAutoScrollSpeed();
+    }
 
-    $('#black_list_radio').click(function () {
-      showBlackList();
-    });
+    function bindEvents(){
+      $('#black_list_radio').click(function () {
+        showBlackList();
+      });
 
-    $('#white_list_radio').click(function () {
-      showWhiteList();
-    });
+      $('#white_list_radio').click(function () {
+        showWhiteList();
+      });
 
-    $('#save_btn').click(function () {
-      var data = $('#' + use).val().split('\n');
-      saveData(use, data);
-      savePosition();
-      saveAutoScrollSpeed();
-      localStorage.setItem('use', use);
-      localStorage.setItem('savePosition', $('#save_position').is(':checked'));
-      $('#notice_wrap').slideDown('fast');
-      window.setTimeout(function () {
-        $('#notice_wrap').slideUp('fase');
-      }, 3000);
-    });
+      $('#save_btn').click(function () {
+        var data = $('#' + use).val().split('\n');
+        saveData(use, data);
+        savePosition();
+        saveAutoScrollSpeed();
+        localStorage.setItem('use', use);
+        localStorage.setItem('savePosition', $('#save_position').is(':checked'));
+        $('#notice_wrap').slideDown('fast');
+        window.setTimeout(function () {
+          $('#notice_wrap').slideUp('fase');
+        }, 3000);
+      });
 
-    $('#example').click(function () {
-      var $content = $('.example_content');
-      if ($content.is(':visible')) {
-        $content.slideUp('fast');
-      } else {
-        $content.slideDown('fast');
-      }
-    });
+      $('#example').click(function () {
+        var $content = $('.example_content');
+        if ($content.is(':visible')) {
+          $content.slideUp('fast');
+        } else {
+          $content.slideDown('fast');
+        }
+      });
+    }
 
-    function showData(){
+    function checkUpdate(){
+      $.get("https://raw.githubusercontent.com/lingzhuzi/scroll_page_helper_release/master/version.json", function(json){
+        var data = JSON.parse(json);
+        var version = data.version;
+        var log = data.log;
+        if (version > VERSION){
+          $('#update_ctn').show();
+          $('#update_ctn .version').html("版本：" + version);
+          $('#update_ctn .log').html($(log));
+        } else {
+          $('#update_ctn').remove();
+        }
+      });
+    }
+
+    function showVersion(){
       $.get(chrome.extension.getURL('manifest.json'), function(info){
-        var version = info.version;
-        $('#version_no').text(version);
+        VERSION = parseFloat(info.version);
+        $('#version_no').text(info.version);
       }, 'json');
+    }
 
+    function showList(){
       var defualtBlackList = [];
       var use = localStorage.getItem('use');
       if (!use) {
@@ -63,14 +81,6 @@
       } else if (use == WHITE_LIST) {
         showWhiteList();
       }
-
-      var savePosition = localStorage.getItem('savePosition');
-      if (savePosition == 'true') {
-        $('#save_position').attr('checked', 'checked');
-      }
-
-      showPosition();
-      showAutoScrollSpeed();
     }
 
     function showBlackList() {
@@ -92,6 +102,11 @@
     }
 
     function showPosition(){
+      var savePosition = localStorage.getItem('savePosition');
+      if (savePosition == 'true') {
+        $('#save_position').attr('checked', 'checked');
+      }
+
       var position = JSON.parse(localStorage.getItem("position"));
       var left     = position.left;
       var right    = position.right;
@@ -137,7 +152,7 @@
     function showAutoScrollSpeed(){
       var speed = localStorage.getItem('scroll_speed');
       if(!speed) {
-        speed = 1;
+        speed = 20;
         localStorage.setItem('scroll_speed', speed);
       }
       $("#auto_scroll_speed").val(speed);

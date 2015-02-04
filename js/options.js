@@ -46,7 +46,7 @@
     }
 
     function checkUpdate(){
-      $.get("https://raw.githubusercontent.com/lingzhuzi/scroll_page_helper_release/master/version.json", function(json){
+      $.get("https://raw.githubusercontent.com/lingzhuzi/scroll_page_helper/master/release/version.json", function(json){
         var data = JSON.parse(json);
         var version = data.version;
         var log = data.log;

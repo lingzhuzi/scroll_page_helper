@@ -1,15 +1,15 @@
 (function () {
   chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.message == 'getData') {
-      var use = localStorage.getItem('use') || 'black_list';
-      var data = JSON.parse(localStorage.getItem(use)) || [];
-      var position = JSON.parse(localStorage.getItem('position'));
-      var scroll_speed = parseInt(localStorage.getItem('scroll_speed'));
+      var use = getData('use', 'black_list');
+      var data = getData(use, []);
+      var position = getData('position', null);
+      var scroll_speed = getData('scroll_speed', 20);
       sendResponse({use: use, data: data, position: position, scroll_speed: scroll_speed});
     } else if (request.message == 'openOptions') {
       chrome.extension.getBackgroundPage().open('options.html');
     } else if (request.message == 'savePosition') {
-      var savePosition = localStorage.getItem('savePosition');
+      var savePosition = localStorage.getItem('autoSavePosition');
       if (savePosition == 'true' || request.from == 'menu') {
         localStorage.setItem('position', JSON.stringify(request.position));
       }
@@ -21,4 +21,10 @@
       localStorage.setItem(use, json);
     }
   });
+
+  function getData(name, defaultData){
+    var strData = localStorage.getItem(name);
+    return strData ? JSON.parse(strData) : defaultData;
+  }
+
 })();

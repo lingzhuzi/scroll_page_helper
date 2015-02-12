@@ -2,12 +2,46 @@
   $(function () {
     var BLACK_LIST = 'black_list', WHITE_LIST = 'white_list';
     var VERSION = 0;
+    showVersion();
+    checkUpdate();
+    initDefaultData();
     showSettingData();
     bindEvents();
-    checkUpdate();
+
+    function initDefaultData(){
+      initDefaultList();
+      initDefaultPosition();
+      initDefaultScrollSpeed();
+    }
+
+    function initDefaultList(){
+      if (!getData('use')) {
+        saveData('use', BLACK_LIST);
+      }
+      if (!getData(BLACK_LIST)) {
+        saveData(BLACK_LIST, []);
+      }
+      if (!getData(WHITE_LIST)) {
+        saveData(WHITE_LIST, []);
+      }
+    }
+
+    function initDefaultPosition(){
+      var position = getData('position');
+      if(!position){
+        var position = {top: 85, right: 10};
+        saveData("position", position);
+      }
+    }
+
+    function initDefaultScrollSpeed(){
+      var speed = getData('scroll_speed');
+      if(!speed){
+        saveData('scroll_speed', 20);
+      }
+    }
 
     function showSettingData(){
-      showVersion();
       showList();
       showPosition();
       showAutoScrollSpeed();
@@ -23,12 +57,13 @@
       });
 
       $('#save_btn').click(function () {
+        var use = $('#black_list_radio').is(':checked') ? BLACK_LIST : WHITE_LIST;
         var data = $('#' + use).val().split('\n');
         saveData(use, data);
         savePosition();
         saveAutoScrollSpeed();
-        localStorage.setItem('use', use);
-        localStorage.setItem('savePosition', $('#save_position').is(':checked'));
+        saveData('use', use);
+        saveData('autoSavePosition', $('#auto_save_position').is(':checked'));
         $('#notice_wrap').slideDown('fast');
         window.setTimeout(function () {
           $('#notice_wrap').slideUp('fase');
@@ -68,15 +103,8 @@
     }
 
     function showList(){
-      var defualtBlackList = [];
-      var use = localStorage.getItem('use');
-      if (!use) {
-        use = BLACK_LIST;
-        localStorage.setItem('use', use);
-        saveData(BLACK_LIST, defualtBlackList);
-        saveData(WHITE_LIST, []);
-        showBlackList();
-      } else if (use == BLACK_LIST) {
+      var use = getData('use');
+      if (use == BLACK_LIST) {
         showBlackList();
       } else if (use == WHITE_LIST) {
         showWhiteList();
@@ -87,8 +115,8 @@
       $('#black_list_radio').attr('checked', 'checked');
       $('#black_list_ctn').show();
       $('#white_list_ctn').hide();
-      use = BLACK_LIST;
-      var data = JSON.parse(localStorage.getItem(BLACK_LIST)).join('\n');
+
+      var data = getData(BLACK_LIST, []).join('\n');
       $('#black_list').text(data);
     }
 
@@ -96,18 +124,18 @@
       $('#white_list_radio').attr('checked', 'checked');
       $('#white_list_ctn').show();
       $('#black_list_ctn').hide();
-      use = WHITE_LIST;
-      var data = JSON.parse(localStorage.getItem(WHITE_LIST)).join('\n');
+
+      var data = getData(WHITE_LIST, []).join('\n');
       $('#white_list').text(data);
     }
 
     function showPosition(){
-      var savePosition = localStorage.getItem('savePosition');
-      if (savePosition == 'true') {
-        $('#save_position').attr('checked', 'checked');
+      var autoSavePosition = getData('autoSavePosition');
+      if (autoSavePosition) {
+        $('#auto_save_position').attr('checked', 'checked');
       }
 
-      var position = JSON.parse(localStorage.getItem("position"));
+      var position = getData("position");
       var left     = position.left;
       var right    = position.right;
       var top      = position.top;
@@ -142,25 +170,27 @@
       var tob = $("select.top_or_bottom").val() == 3 ? 'top' : 'bottom';
       position[tob] = parseInt($("input.top_or_bottom").val());
 
-      localStorage.setItem("position", JSON.stringify(position));
+      saveData("position", position);
     }
 
     function saveData(list_name, data) {
-      localStorage.setItem(list_name, JSON.stringify(data));
+      var strData = JSON.stringify(data);
+      localStorage.setItem(list_name, strData);
+    }
+
+    function getData(name, defaultData){
+      var strData = localStorage.getItem(name);
+      return strData ? JSON.parse(strData) : defaultData;
     }
 
     function showAutoScrollSpeed(){
-      var speed = localStorage.getItem('scroll_speed');
-      if(!speed) {
-        speed = 20;
-        localStorage.setItem('scroll_speed', speed);
-      }
+      var speed = getData('scroll_speed');
       $("#auto_scroll_speed").val(speed);
     }
 
     function saveAutoScrollSpeed(){
       var speed = $("#auto_scroll_speed").val();
-      localStorage.setItem('scroll_speed', speed);
+      saveData('scroll_speed', speed);
     }
   });
 })();

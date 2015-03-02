@@ -6,21 +6,19 @@
       function (response) {
         self.use = response.use;
         self.data = response.data;
+        self.position = response.position;
         self.scroll_speed = response.scroll_speed;
-        if (self._canInit()) {
-          self.createBoxes();
-          self.setPosition(response.position);
-          self.createContextMenus();
-          self.bindEvents();
-          self.displayBoxes();
-        }
+        self.closed = false;
+
+        self.initBoxes();
+        self.bindGlobalEvents();
       });
   };
 
   ScrollHelper.prototype = {
     _canInit: function () {
       var self = this, isIn = self._inList();
-      return self.use == 'black_list' && !isIn || self.use == 'white_list' && isIn;
+      return !self.closed && self.use == 'black_list' && !isIn || self.use == 'white_list' && isIn;
     },
     _inList: function () {
       var self = this, url = window.location.href, list = self.data, length = list.length, isIn = false;
@@ -31,6 +29,17 @@
         }
       }
       return isIn;
+    },
+    initBoxes: function () {
+      var self = this;
+      var $helper = $('div.scroll-helper');
+      if (self._canInit() && $helper.length == 0){
+        self.createBoxes();
+        self.setPosition();
+        self.createContextMenus();
+        self.displayBoxes();
+        self.bindEvents();
+      }
     },
     createBoxes: function () {
       var self = this;
@@ -86,8 +95,8 @@
 
       return position;
     },
-    setPosition: function (position) {
-      var self = this;
+    setPosition: function () {
+      var self = this, position = self.position;
       if (position) {
         var left = position.left, right = position.right, top = position.top, bottom = position.bottom;
         if (top != undefined) {
@@ -109,6 +118,18 @@
       self.bindDragEvents();
       self.bindMenuEvents();
     },
+    bindGlobalEvents: function () {
+      var self = this;
+      self.$window.scroll(function () {
+        self.initBoxes();
+        self.displayBoxes();
+      });
+
+      self.$window.resize(function () {
+        self.initBoxes();
+        self.displayBoxes();
+      });
+    },
     bindBoxesEvents: function(){
       var self = this;
       self.$topBox.click(function () {
@@ -125,14 +146,6 @@
 
       self.$nextBox.click(function () {
         self.scrollTo(self.$body.scrollTop() + self.$window.height());
-      });
-
-      self.$window.scroll(function () {
-        self.displayBoxes();
-      });
-
-      self.$window.resize(function () {
-        self.displayBoxes();
       });
 
       $.each([self.$topBox, self.$bottomBox, self.$prevBox, self.$nextBox], function (i, box) {
@@ -177,7 +190,8 @@
         stop: function (event, ui) {
           var left = ui.position.left, top = ui.position.top;
           var position = self.buildPosition(left, top);
-          self.setPosition(position);
+          self.position = position;
+          self.setPosition();
           chrome.extension.sendMessage({message: "savePosition", position: position});
           window.setTimeout(function () {
             self.dragging = false;
@@ -212,6 +226,7 @@
     bindMenuItemEvents: function(){
       var self = this;
       self.$menus.find('.close').click(function(){
+        self.closed = true;
         self.$container.remove();
       });
       self.$menus.find('.auto-scroll').click(function(){
@@ -232,11 +247,13 @@
         var url = location.href;
         url = url.split(/[#?]/)[0];
         chrome.extension.sendMessage({message: "addToBlackList", url: url});
+        self.closed = true;
         self.$container.remove();
       });
       self.$menus.find('.not-in-this-website').click(function(){
         var url = location.protocol + "//" + location.hostname;
         chrome.extension.sendMessage({message: "addToBlackList", url: url});
+        self.closed = true;
         self.$container.remove();
       });
       self.$menus.find('a').click(function(){

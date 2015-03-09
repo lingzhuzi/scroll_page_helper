@@ -8,35 +8,35 @@
     showSettingData();
     bindEvents();
 
-    function initDefaultData(){
-      initDefaultList();
-      initDefaultPosition();
-      initDefaultScrollSpeed();
+    function initDefaultData (force) {
+      initDefaultList(force);
+      initDefaultPosition(force);
+      initDefaultScrollSpeed(force);
     }
 
-    function initDefaultList(){
-      if (!getData('use')) {
+    function initDefaultList(force){
+      if (force || !getData('use')) {
         saveData('use', BLACK_LIST);
       }
-      if (!getData(BLACK_LIST)) {
+      if (force || !getData(BLACK_LIST)) {
         saveData(BLACK_LIST, []);
       }
-      if (!getData(WHITE_LIST)) {
+      if (force || !getData(WHITE_LIST)) {
         saveData(WHITE_LIST, []);
       }
     }
 
-    function initDefaultPosition(){
+    function initDefaultPosition(force){
       var position = getData('position');
-      if(!position){
+      if(force || !position){
         var position = {top: 85, right: 10};
         saveData("position", position);
       }
     }
 
-    function initDefaultScrollSpeed(){
+    function initDefaultScrollSpeed(force){
       var speed = getData('scroll_speed');
-      if(!speed){
+      if(force || !speed){
         saveData('scroll_speed', 20);
       }
     }
@@ -77,6 +77,11 @@
         } else {
           $content.slideDown('fast');
         }
+      });
+
+      $('#to_default').click(function(){
+        initDefaultData(true);
+        showSettingData();
       });
     }
 

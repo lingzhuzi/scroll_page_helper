@@ -233,10 +233,8 @@
         var scrolling = self.scrolling;
         if(scrolling){
           self.stopAutoScroll();
-          $(this).text('开启自动滚动');
         } else {
           self.startAutoScroll();
-          $(this).text('关闭自动滚动');
         }
       });
       self.$menus.find('.save-position').click(function(){
@@ -304,6 +302,7 @@
     startAutoScroll: function(){
       var self = this, speed = 1000/self.scroll_speed;
       self.scrolling = true;
+      self.$menus.find('.auto-scroll').text('关闭自动滚动');
       self.autoScrollInterval = window.setInterval(function(){
         var scrollTop = self.$body.scrollTop();
         if(!self.scrolling || scrollTop >= self.$document.height() - self.$window.height()){
@@ -317,11 +316,10 @@
       var self = this;
       self.scrolling = false;
       window.clearInterval(self.autoScrollInterval);
+      self.$menus.find('.auto-scroll').text('开启自动滚动');
     }
   };
 
-  // $(function(){
-    new ScrollHelper();
-  // });
+  new ScrollHelper();
 
 })();

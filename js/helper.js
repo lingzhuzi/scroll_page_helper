@@ -8,6 +8,8 @@
         self.data = response.data;
         self.position = response.position;
         self.scroll_speed = response.scroll_speed;
+        self.auto_hide_buttons = response.auto_hide_buttons;
+        self.auto_hide_s_buttons = response.auto_hide_s_buttons;
         self.closed = false;
 
         self.initBoxes();
@@ -57,6 +59,10 @@
 
       self.$container.append([self.$topBox, self.$bottomBox, self.$prevBox, self.$nextBox, self.$settingBox]);
       self.$body.append(self.$container);
+
+      if (!self.auto_hide_s_buttons) {
+        self.$settingBox.css({opacity: 0.8});
+      }
     },
     createContextMenus: function(){
       var self = this;
@@ -163,7 +169,7 @@
 
       self.$settingBox.mouseleave(function () {
         var $this = $(this);
-        if (!self.dragging) {
+        if (!self.dragging && self.auto_hide_s_buttons) {
           $this.animate({opacity: 0}, 'fast');
         }
       });
@@ -286,7 +292,7 @@
       if (scrollTop > 0) {
         self.$topBox.show();
         self.$prevBox.show();
-      } else {
+      } else if (self.auto_hide_buttons) {
         self.$topBox.hide();
         self.$prevBox.hide();
       }
@@ -294,7 +300,7 @@
       if (scrollTop + winHeight >= docHeight) {
         self.$nextBox.hide();
         self.$bottomBox.hide();
-      } else {
+      } else if (self.auto_hide_buttons) {
         self.$nextBox.show();
         self.$bottomBox.show();
       }

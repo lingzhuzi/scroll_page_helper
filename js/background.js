@@ -5,7 +5,17 @@
       var data = getData(use, []);
       var position = getData('position', null);
       var scroll_speed = getData('scroll_speed', 20);
-      sendResponse({use: use, data: data, position: position, scroll_speed: scroll_speed});
+      var autoHideButtons = getData('autoHideButtons');
+      var autoHideSettingButton = getData('autoHideSettingButton');
+      var responseData = {
+        use: use,
+        data: data,
+        position: position,
+        scroll_speed: scroll_speed,
+        auto_hide_buttons: autoHideButtons,
+        auto_hide_s_buttons: autoHideSettingButton
+      };
+      sendResponse(responseData);
     } else if (request.message == 'openOptions') {
       chrome.extension.getBackgroundPage().open('options.html');
     } else if (request.message == 'savePosition') {

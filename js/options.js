@@ -32,6 +32,15 @@
         var position = {top: 85, right: 10};
         saveData("position", position);
       }
+      var autoHideButtons = getData('autoHideButtons', null);
+      if (force || autoHideButtons == null) {
+        saveData('autoHideButtons', true);
+      }
+
+      var autoHideSettingButton = getData('autoHideSettingButton', null);
+      if (force || autoHideSettingButton == null) {
+        saveData('autoHideSettingButton', true);
+      }
     }
 
     function initDefaultScrollSpeed(force){
@@ -64,6 +73,8 @@
         saveAutoScrollSpeed();
         saveData('use', use);
         saveData('autoSavePosition', $('#auto_save_position').is(':checked'));
+        saveData('autoHideButtons', $('#auto_hide_buttons').is(':checked'));
+        saveData('autoHideSettingButton', $('#auto_hide_s_buttons').is(':checked'));
         $('#notice_wrap').slideDown('fast');
         window.setTimeout(function () {
           $('#notice_wrap').slideUp('fase');
@@ -135,6 +146,16 @@
     }
 
     function showPosition(){
+      var autoHideButtons = getData('autoHideButtons');
+      if (autoHideButtons) {
+        $('#auto_hide_buttons').attr('checked', 'checked');
+      }
+
+      var autoHideSettingButton = getData('autoHideSettingButton');
+      if (autoHideSettingButton) {
+        $('#auto_hide_s_buttons').attr('checked', 'checked');
+      }
+
       var autoSavePosition = getData('autoSavePosition');
       if (autoSavePosition) {
         $('#auto_save_position').attr('checked', 'checked');

@@ -297,10 +297,10 @@
         self.$prevBox.hide();
       }
 
-      if (scrollTop + winHeight >= docHeight) {
+      if (scrollTop + winHeight >= docHeight && self.auto_hide_buttons) {
         self.$nextBox.hide();
         self.$bottomBox.hide();
-      } else if (self.auto_hide_buttons) {
+      } else {
         self.$nextBox.show();
         self.$bottomBox.show();
       }

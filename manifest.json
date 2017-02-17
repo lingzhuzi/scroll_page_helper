@@ -16,6 +16,7 @@
   "permissions": [
     "tabs", "http://*/*", "https://*/*"
   ],
+  "update_url": "http://upext.chrome.360.cn/intf.php?method=ExtUpdate.query",
   "browser_action": {
     "default_title": "翻屏小助手",
     "default_icon": "img/icon.png",

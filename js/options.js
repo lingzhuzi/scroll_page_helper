@@ -3,7 +3,7 @@
     var BLACK_LIST = 'black_list', WHITE_LIST = 'white_list';
     var VERSION = 0;
     showVersion();
-    checkUpdate();
+    // checkUpdate();
     initDefaultData();
     showSettingData();
     bindEvents();

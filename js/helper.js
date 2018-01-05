@@ -147,11 +147,11 @@
       });
 
       self.$prevBox.click(function () {
-        self.scrollTo(self.$body.scrollTop() - self.$window.height());
+        self.scrollTo(self.$document.scrollTop() - self.$window.height());
       });
 
       self.$nextBox.click(function () {
-        self.scrollTo(self.$body.scrollTop() + self.$window.height());
+        self.scrollTo(self.$document.scrollTop() + self.$window.height());
       });
 
       $.each([self.$topBox, self.$bottomBox, self.$prevBox, self.$nextBox], function (i, box) {
@@ -282,7 +282,7 @@
     },
     scrollTo: function (scrollTop) {
       var self = this;
-      self.$body.animate({scrollTop: scrollTop}, 'fast', function () {
+      $('html, body').animate({scrollTop: scrollTop}, 'fast', function () {
         self.displayBoxes();
       });
     },
